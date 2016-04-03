@@ -1,56 +1,7 @@
-﻿#Requires -Version 3.0
+#Requires -Version 3.0
 
 # https://dweet.io/play/
 $Global:DweetURL = 'https://dweet.io:443/' 
-
-function Get-Dweet{
-    [CmdletBinding()]
-    Param
-    (
-        # Thing (recommended to use a GUID to avoid clashes)
-        [Parameter(Mandatory=$false,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-        $Thing = [guid]::NewGuid(),
-
-        # Key (to access a locked dweet)
-        [Parameter(Mandatory=$false,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=1)]
-        [String]$Key,
-
-        # Latest (only specify if you want the latest)
-        [Parameter(Mandatory=$false,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=2)]
-        [switch]$Latest
-    )
-
-    begin
-    {
-    }
-    process
-    {
-        # latest dweet, or latest 5 (default)
-        if($Latest){ $action = 'get/latest/dweet/for/' }
-              else { $action = 'get/dweets/for/' }
-
-        # build request URL
-        $requestURL = $Global:DweetURL + $action + $Thing
-
-        # append key if specified
-        if($Key){
-            $requestURL += "?key=$Key"
-        }
-
-        # web request
-        Invoke-RestMethod -Uri $requestURL -Method Get -ContentType 'application/json'
-        
-    }
-    end
-    {
-    }
-}
 
 function New-Dweet{
     [CmdletBinding()]
@@ -101,6 +52,56 @@ function New-Dweet{
     }
 }
 
+function Get-Dweet{
+    [CmdletBinding()]
+    Param
+    (
+        # Thing (recommended to use a GUID to avoid clashes)
+        [Parameter(Mandatory=$false,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+        [string]$Thing,
+
+        # Key (to access a locked dweet)
+        [Parameter(Mandatory=$false,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=1)]
+        [String]$Key,
+
+        # Latest (only specify if you want the latest)
+        [Parameter(Mandatory=$false,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=2)]
+        [switch]$Latest
+    )
+
+    begin
+    {
+    }
+    process
+    {
+        # latest dweet, or latest 5 (default)
+        if($Latest){ $action = 'get/latest/dweet/for/' }
+              else { $action = 'get/dweets/for/' }
+
+        # build request URL
+        $requestURL = $Global:DweetURL + $action + $Thing
+
+        # append key if specified
+        if($Key){
+            $requestURL += "?key=$Key"
+        }
+
+        # web request
+        Invoke-RestMethod -Uri $requestURL -Method Get -ContentType 'application/json'
+        
+    }
+    end
+    {
+    }
+}
+
+# Usage: Get-Dweet -Thing 'some-thing-name' | Get-DweetContent
 function Get-DweetContent{
     [Cmdletbinding()]
     param(
