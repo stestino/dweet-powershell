@@ -188,7 +188,7 @@ function Unlock-Dweet{
 
 }
 
-function Remove-Dweet{
+function Remove-DweetLock{
     [Cmdletbinding()]
     param(
         # Lock (lock to apply to a thing)
