@@ -30,7 +30,7 @@ Get-Dweet -Thing 'dweet-name'
 ```
 
 #### ...with a key
-```powershell```
+```powershell
 $secretDweet = Get-Dweet -Thing 'dweet-name' -Key 'dweet-key-super-secret'
 
 $secretDweet | Get-DweetContent
