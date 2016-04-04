@@ -1,5 +1,6 @@
 # dweet-powershell
 PowerShell Module for Dweet.IO 
+* requires PowerShell 3.0
 
 
 ### Import the Module
