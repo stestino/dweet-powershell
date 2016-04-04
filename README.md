@@ -29,7 +29,7 @@ New-Dweet -Thing 'dweet-name' -Content $someJson -Key 'some-secret-dweet-key'
 Get-Dweet -Thing 'dweet-name'
 ```
 
-#### ...with a key
+#### ...with a key, and unpack the thing content
 ```powershell
 $secretDweet = Get-Dweet -Thing 'dweet-name' -Key 'dweet-key-super-secret'
 
