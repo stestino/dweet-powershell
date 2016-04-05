@@ -1,5 +1,5 @@
 # dweet-powershell
-PowerShell Module for Dweet.IO 
+PowerShell Module for [Dweet.IO](http://dweet.io/) 
 * requires PowerShell 3.0
 
 
